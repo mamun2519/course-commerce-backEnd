@@ -28,3 +28,55 @@ exports.createCourse = async (req, res, next) => {
     console.log(e);
   }
 };
+
+exports.getAllCourse = async (req, res, next) => {
+  const course = await CoursesDB.find({});
+  res.send({ success: true, course });
+};
+
+exports.updateCourser = async (req, res, next) => {
+  const id = req.params.id;
+  let course = await CoursesDB.findById(id);
+  if (!course) {
+    res.status(500).json({
+      success: false,
+      message: "Course Not found",
+    });
+  }
+
+  course = await CoursesDB.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+    useFindAndModify: false,
+  });
+
+  res.status(200).json({
+    success: true,
+    course,
+  });
+};
+
+exports.deleteCourse = async (req, res, next) => {
+  const id = req.params.id;
+  let course = await CoursesDB.findById(id);
+  if (!course) {
+    res.status(500).json({
+      success: false,
+      message: "Course Not found",
+    });
+  }
+  await course.remove();
+  res.status(200).json({
+    success: true,
+    message: "Course Delete Successfull",
+  });
+};
+
+exports.getCourseDetels = async (req, res, next) => {
+  const id = req.params.id;
+  const course = await CoursesDB.findById(id);
+  res.json({
+    success: true,
+    course,
+  });
+};
