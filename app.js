@@ -14,8 +14,10 @@ app.use(express.static("public"));
 // all router
 const userRouter = require("./router/user")
 const courseRouter = require("./router/courses")
+const orderRouter = require("./router/order")
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/courses", courseRouter)
+app.use("/api/v1/order", orderRouter)
 
 
 app.use('/' , (req , res)=>{
