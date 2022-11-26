@@ -30,7 +30,11 @@ exports.createCourse = async (req, res, next) => {
 };
 
 exports.getAllCourse = async (req, res, next) => {
-  const course = await CoursesDB.find({});
+  const { category } = req.query;
+  console.log(category);
+  const course = await CoursesDB.find({  $and: [
+    { category: { $regex: category, $options: "i" } },
+  ],});
   res.send({ success: true, course });
 };
 
