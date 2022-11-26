@@ -8,9 +8,11 @@ exports.userRegister = async (req, res, next) => {
     if (user)
       return res
         .status(202)
-        .send({ success: false, message: "user already exists" });
+        .send({ success: false, message: "User Already Exists" });
     const adduser = await UserDB.create({ name, email });
-    res.send({ success: true, message: "register Successfull" });
+    // res.send({ success: true, message: "register Successfull" });
+    sendToken(adduser, 200, res);
+    
   } catch (e) {
     console.log(e);
   }
@@ -23,7 +25,7 @@ exports.userLogin = async (req, res, next) => {
     if (!user)
       return res
         .status(202)
-        .send({ success: false, message: "user not found" });
+        .send({ success: false, message: "User Not Found!" });
     sendToken(user, 200, res);
   } catch (e) {
     console.log(e);

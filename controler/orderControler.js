@@ -1,5 +1,8 @@
 const OrderDB = require("../modal/orderModal");
-
+const CourseDB = require("../modal/coursesModal")
+const stripe = require("stripe")(
+  "sk_test_51L1nmNCGpaTt0RU81oq26j6Ta7gwb9pGlOOwxjeXAQgefsXMvmRxFUopKE2St6GDbDpxjUug0KxRyqzL6oKarPcR00lqLjh70r"
+);
 exports.newOrder = async (req, res, next) => {
   try {
     const d = new Date();
@@ -153,11 +156,11 @@ exports.orderUpdate = async (req, res, next) => {
       });
     }
 
-    //     if (req.body.status === "Shipped") {
-    //       order.orderItems.forEach(async (o) => {
-    //         await updateStock(o.product, o.quantity);
-    //       });
-    //     }
+        if (req.body.status === "Shipped") {
+          order.orderItems.forEach(async (o) => {
+            await updateStock(o.product, o.quantity);
+          });
+        }
     order.orderStatus = req.body.status;
 
     if (req.body.status === "Delivered") {
@@ -170,4 +173,43 @@ exports.orderUpdate = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+async function updateStock(id, quantity) {
+  try{
+    const product = await CourseDB.findById(id);
+
+  product.Stock -= quantity;
+
+  await product.save({ validateBeforeSave: false });
+  }
+  catch(error){
+
+  }
+  
+}
+
+exports.paymentGetWay = async (req, res, next) => {
+  try{
+    const service = req.body;
+    const price = service.price;
+    const amount = price * 100;
+  
+    // Create a PaymentIntent with the order amount and currency
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: amount,
+      currency: "usd",
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
+  
+    res.send({
+      clientSecrets: paymentIntent.client_secret,
+    });
+  }
+  catch(error){
+    console.log(error)
+  }
+ 
 };
