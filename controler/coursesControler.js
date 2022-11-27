@@ -30,12 +30,29 @@ exports.createCourse = async (req, res, next) => {
 };
 
 exports.getAllCourse = async (req, res, next) => {
-  const { category } = req.query;
-  console.log(category);
-  const course = await CoursesDB.find({  $and: [
-    { category: { $regex: category, $options: "i" } },
-  ],});
-  res.send({ success: true, course });
+  try {
+    const { category, kewword } = req.query;
+    if (category) {
+      if (category == "All") {
+        const course = await CoursesDB.find({});
+        res.send({ success: true, course });
+      } else {
+        const course = await CoursesDB.find({
+          $or: [
+            { category: { $regex: category, $options: "i" } },
+            { name: { $regex: kewword, $options: "i" } },
+            // { name: kewword },
+          ],
+        });
+        res.send({ success: true, course });
+      }
+    } else {
+      const course = await CoursesDB.find({});
+      res.send({ success: true, course });
+    }
+  } catch (e) {
+    console.log(e);
+  }
 };
 
 exports.updateCourser = async (req, res, next) => {
