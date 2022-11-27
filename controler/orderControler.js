@@ -1,5 +1,5 @@
 const OrderDB = require("../modal/orderModal");
-const CourseDB = require("../modal/coursesModal")
+const CourseDB = require("../modal/coursesModal");
 const stripe = require("stripe")(
   "sk_test_51L1nmNCGpaTt0RU81oq26j6Ta7gwb9pGlOOwxjeXAQgefsXMvmRxFUopKE2St6GDbDpxjUug0KxRyqzL6oKarPcR00lqLjh70r"
 );
@@ -73,7 +73,9 @@ exports.getSingleOrder = async (req, res, next) => {
 
 exports.orderDelete = async (req, res, next) => {
   try {
+    console.log(req.params.id)
     const order = await OrderDB.findById(req.params.id);
+    console.log(order);
     if (!order) {
       res.status(404).json({
         success: false,
@@ -156,11 +158,11 @@ exports.orderUpdate = async (req, res, next) => {
       });
     }
 
-        if (req.body.status === "Shipped") {
-          order.orderItems.forEach(async (o) => {
-            await updateStock(o.product, o.quantity);
-          });
-        }
+    if (req.body.status === "Shipped") {
+      order.orderItems.forEach(async (o) => {
+        await updateStock(o.product, o.quantity);
+      });
+    }
     order.orderStatus = req.body.status;
 
     if (req.body.status === "Delivered") {
@@ -176,25 +178,21 @@ exports.orderUpdate = async (req, res, next) => {
 };
 
 async function updateStock(id, quantity) {
-  try{
+  try {
     const product = await CourseDB.findById(id);
 
-  product.Stock -= quantity;
+    product.Stock -= quantity;
 
-  await product.save({ validateBeforeSave: false });
-  }
-  catch(error){
-
-  }
-  
+    await product.save({ validateBeforeSave: false });
+  } catch (error) {}
 }
 
 exports.paymentGetWay = async (req, res, next) => {
-  try{
+  try {
     const service = req.body;
     const price = service.price;
     const amount = price * 100;
-  
+
     // Create a PaymentIntent with the order amount and currency
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount,
@@ -203,13 +201,11 @@ exports.paymentGetWay = async (req, res, next) => {
         enabled: true,
       },
     });
-  
+
     res.send({
       clientSecrets: paymentIntent.client_secret,
     });
+  } catch (error) {
+    console.log(error);
   }
-  catch(error){
-    console.log(error)
-  }
- 
 };

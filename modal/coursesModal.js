@@ -15,10 +15,11 @@ const courcesShema = new mongoose.Schema({
             required: [true, "Please Enter product Price"],
             maxLength: [8, "Price cannot exceed 8 characters"],
           },
-      //     ratings: {
-      //       type: Number,
-      //       default: 0,
-      //     },
+        
+courseTitle: {
+  type: String,
+  required: [true, "Please Enter Product Category"],
+          },
           images: [
             {
               public_id: {

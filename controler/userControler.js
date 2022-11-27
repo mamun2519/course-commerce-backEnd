@@ -54,7 +54,7 @@ exports.getAllAdvaiser = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     // const search = req.query.search || "";
     const user = await UserDB.find({
-      $and: [{ role: "advaiser" }],
+      $and: [{ role: "adviser" }],
     })
       .skip(page * limit)
       .limit(limit);
