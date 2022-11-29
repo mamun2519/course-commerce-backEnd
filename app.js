@@ -2,7 +2,7 @@ const express = require('express');
 const app = express()
 const cors = require('cors')
 app.use(cors({
-      origin: "http://localhost:3000"
+      origin: "https://course-commerse.web.app"
 }))
 // const cookieParser = require('cookie-parser')
 const fileUpload = require("express-fileupload");
