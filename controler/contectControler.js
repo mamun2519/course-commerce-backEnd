@@ -37,7 +37,7 @@ exports.deleteContect = async (req, res, next) => {
       message: "contect Not found",
     });
   }
-  await course.remove();
+  await contect.remove();
   res.status(200).json({
     success: true,
     message: "Message Delete Successfull",

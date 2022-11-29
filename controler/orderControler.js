@@ -120,10 +120,11 @@ exports.discountPromoCode = async (req, res, next) => {
   try {
     const price = parseInt(req.query.totalCost);
     const promoCode = parseInt(req.query.code);
-    const screctCode = [4000, 5000, 6000];
-    const codeMatch = screctCode.includes(promoCode);
+    console.log(req.query.code)
+    const screctCode = ["freec"];
+    const codeMatch = screctCode.includes(req.query.code);
     if (codeMatch) {
-      const discountPrice = parseInt((price / 100) * 20);
+      const discountPrice = parseInt((price / 100) * 99);
       const totalPrice = price - discountPrice;
       res.status(200).json({
         success: true,
