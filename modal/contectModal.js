@@ -1,47 +1,28 @@
 const mongoose = require("mongoose");
 
-const courcesShema = new mongoose.Schema({
+const contectShema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Please Enter product Name"],
     trim: true,
   },
-  description: {
+  phone: {
     type: String,
     required: [true, "Please Enter product Description"],
   },
-  price: {
-    type: Number,
-    required: [true, "Please Enter product Price"],
-    maxLength: [8, "Price cannot exceed 8 characters"],
+  subject: {
+    type: String,
+    required: [true, "Please Enter product Description"],
+  },
+  email: {
+    type: String,
+    required: [true, "Please Enter product Description"],
+  },
+  message: {
+    type: String,
+    required: [true, "Please Enter product Description"],
   },
 
-  courseTitle: {
-    type: String,
-    required: [true, "Please Enter Product Category"],
-  },
-  images: [
-    {
-      public_id: {
-        type: String,
-        required: true,
-      },
-      url: {
-        type: String,
-        required: true,
-      },
-    },
-  ],
-  category: {
-    type: String,
-    required: [true, "Please Enter Product Category"],
-  },
-  Stock: {
-    type: Number,
-    required: [true, "Please Enter product Stock"],
-    maxLength: [4, "Stock cannot exceed 4 characters"],
-    default: 1,
-  },
   //     numOfReviews: {
   //       type: Number,
   //       default: 0,
@@ -85,12 +66,9 @@ const courcesShema = new mongoose.Schema({
   //       ref: "User",
   //       required: true,
   //     },
-  createdAt: {
-    type: Date,
-    default: Date.now,
-  },
+ 
 });
 
-const coursesModal = new mongoose.model("Courses", courcesShema);
+const contectModal = new mongoose.model("Contect", contectShema);
 
-module.exports = coursesModal;
+module.exports = contectModal;

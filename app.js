@@ -16,17 +16,20 @@ app.use(express.static("public"));
 // all router
 const userRouter = require("./router/user")
 const courseRouter = require("./router/courses")
-const orderRouter = require("./router/order")
+const orderRouter = require("./router/order");
+const errorHandeler = require('./utilities/errorHendeler');
+const contectHandeler = require("./router/contect")
 app.use("/api/v1/user", userRouter)
 app.use("/api/v1/courses", courseRouter)
 app.use("/api/v1/order", orderRouter)
+app.use("/api/v1/contect", contectHandeler)
 
 
 app.use('/' , (req , res)=>{
       res.send("hellw world")
 })
 
-// app.use(errorHandeler)
+app.use(errorHandeler)
 
 
 module.exports = app

@@ -3,22 +3,22 @@ const cloudinary = require("cloudinary");
 
 exports.createCourse = async (req, res, next) => {
   try {
-    // const myCloud = await cloudinary.v2.uploader.upload(req.body.images, {
-    //       folder: "products",
-    //       width: 150,
-    //       crop: "scale",
-    //     });
+    const myCloud = await cloudinary.v2.uploader.upload(req.body.images, {
+          folder: "products",
+          // width: 150,
+          crop: "scale",
+        });
 
-    const { name, description, price, category } = req.body;
+    const { name, description, price, category , courseTitle, Stock} = req.body;
     const sendProudcts = await CoursesDB.create({
       name,
       description,
       price,
-      category,
+      category,  courseTitle, Stock,
       images: {
-        public_id: "xx",
-        url: "xx",
-      },
+        public_id:  myCloud.public_id,
+        url: myCloud.secure_url,
+      }
     });
     res.status(200).json({
       message: "course Added SuccessFull",

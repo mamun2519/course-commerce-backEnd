@@ -54,10 +54,10 @@ exports.getAllAdvaiser = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     // const search = req.query.search || "";
     const user = await UserDB.find({
-      $and: [{ role: "adviser" }],
+      $and: [{ role: "advaiser" }],
     })
-      .skip(page * limit)
-      .limit(limit);
+      // .skip(page * limit)
+      // .limit(limit);
     res.json({ success: true, user, page: page + 1, limit });
   } catch (e) {
     console.log(e);
@@ -72,8 +72,8 @@ exports.getAllOwner = async (req, res, next) => {
     const user = await UserDB.find({
       $and: [{ role: "owner" }],
     })
-      .skip(page * limit)
-      .limit(limit);
+      // .skip(page * limit)
+      // .limit(limit);
     res.json({ success: true, user, page: page + 1, limit });
   } catch (e) {
     console.log(e);
@@ -123,10 +123,12 @@ exports.deleteUser = async (req, res, next) => {
 exports.createAdmin = async (req, res, next) => {
   try {
     const email = req.params.email;
+    console.log(email);
     const adminRequester = req.decoded.email;
     const requestAdmin = await UserDB.findOne({ email: adminRequester });
     if (requestAdmin.role == "owner") {
       const roleAction = req.query.roleAction;
+      
       if (roleAction == "advaiser") {
         const makeAdmin = await UserDB.updateOne(
           { email },
@@ -175,7 +177,9 @@ exports.createAdmin = async (req, res, next) => {
 exports.removeAdmin = async (req, res, next) => {
   try {
     const email = req.params.email;
+    
     const adminRequester = req.decoded.email;
+    console.log(adminRequester)
     const requestAdmin = await UserDB.findOne({ email: adminRequester });
     if (requestAdmin.role == "owner") {
       const roleAction = req.query.roleAction;
@@ -214,7 +218,7 @@ exports.cheackAdmin = async (req, res, next) => {
     if (!user) {
       res.status(404).json({ message: "User Not Found" });
     } else {
-      const isAdmin = user.role === "admin" || user.role === "";
+      const isAdmin = user.role === "owner" || user.role === "advaiser";
       res.status(200).json({
         success: true,
         admin: isAdmin,
