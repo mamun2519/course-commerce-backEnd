@@ -4,7 +4,7 @@ const cors = require('cors')
 app.use(cors({
       origin: "*"
 }))
-// const cookieParser = require('cookie-parser')
+// const cookieParser = require('cookie-parser').......
 const fileUpload = require("express-fileupload");
 // middelwar 
 // app.use(cookieParser())
