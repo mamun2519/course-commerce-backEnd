@@ -2,7 +2,8 @@ const express = require('express');
 const app = express()
 const cors = require('cors')
 app.use(cors({
-      origin: "https://course-commerse.web.app"
+      origin: "https://course-commerse.web.app",
+      methods:["get" , "post"]
 }))
 // const cookieParser = require('cookie-parser').......
 const fileUpload = require("express-fileupload");
