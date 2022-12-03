@@ -7,7 +7,7 @@ app.use(
     origin: "*",
   })
 );
-// const cookieParser = require('cookie-parser')......
+// const cookieParser = require('cookie-parser')....
 const fileUpload = require("express-fileupload");
 // middelwar
 // app.use(cookieParser())
