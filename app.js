@@ -4,7 +4,7 @@ const paypal = require('paypal-rest-sdk');
 const cors = require("cors");
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:3000",
   })
 );
 // const cookieParser = require('cookie-parser')....

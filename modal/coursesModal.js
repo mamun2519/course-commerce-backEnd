@@ -43,7 +43,7 @@ const courcesShema = new mongoose.Schema({
     default: 1,
   },
   googleMap: {
-        type: Number,
+        type: String,
         required: [true, "Please Enter product Stock"],
       },
   //     brand: {
