@@ -42,10 +42,10 @@ const courcesShema = new mongoose.Schema({
     maxLength: [4, "Stock cannot exceed 4 characters"],
     default: 1,
   },
-  //     numOfReviews: {
-  //       type: Number,
-  //       default: 0,
-  //     },
+  googleMap: {
+        type: Number,
+        required: [true, "Please Enter product Stock"],
+      },
   //     brand: {
   //       type: String,
   //       required: true,

@@ -23,10 +23,7 @@ const contectShema = new mongoose.Schema({
     required: [true, "Please Enter product Description"],
   },
 
-  //     numOfReviews: {
-  //       type: Number,
-  //       default: 0,
-  //     },
+
   //     brand: {
   //       type: String,
   //       required: true,
