@@ -44,7 +44,7 @@ const courcesShema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter about"],
   },
-  mession: {
+  mission: {
     type: String,
     required: [true, "Please Enter about"],
   },
