@@ -36,16 +36,25 @@ const courcesShema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter Product Category"],
   },
+  about: {
+    type: String,
+    required: [true, "Please Enter about"],
+  },
+  goal: {
+    type: String,
+    required: [true, "Please Enter about"],
+  },
+  mession: {
+    type: String,
+    required: [true, "Please Enter about"],
+  },
   Stock: {
     type: Number,
     required: [true, "Please Enter product Stock"],
     maxLength: [4, "Stock cannot exceed 4 characters"],
     default: 1,
   },
-  googleMap: {
-        type: String,
-        required: [true, "Please Enter product Stock"],
-      },
+
   //     brand: {
   //       type: String,
   //       required: true,
