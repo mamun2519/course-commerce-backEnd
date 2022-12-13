@@ -55,7 +55,7 @@ const courcesShema = new mongoose.Schema({
     default: 1,
   },
   courseLocation: {
-    type: String,
+    type: Number,
     required: [true, "Please Enter course location"],
   },
 
