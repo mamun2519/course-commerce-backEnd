@@ -54,6 +54,11 @@ const courcesShema = new mongoose.Schema({
     maxLength: [4, "Stock cannot exceed 4 characters"],
     default: 1,
   },
+  courseLocation: {
+    type: String,
+    required: [true, "Please Enter course location"],
+  },
+
 
   //     brand: {
   //       type: String,
