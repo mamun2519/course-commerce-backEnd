@@ -15,7 +15,7 @@ exports.createCourse = async (req, res, next) => {
       name,
       description,
       price,
-      category,  courseTitle, Stock , about , goal, mission , courseLocation
+      category,  courseTitle, Stock , about , goal, mission , courseLocation,
       images: {
         public_id:  myCloud.public_id,
         url: myCloud.secure_url,
