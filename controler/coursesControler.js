@@ -9,13 +9,14 @@ exports.createCourse = async (req, res, next) => {
           crop: "scale",
         });
 
-    const { name, description, price, category , courseTitle, Stock , about , goal, mission , courseLocation} = req.body;
+    const { name, description, price, category , courseTitle, Stock , about , goal, mission , log , lat } = req.body;
+   
     console.log(req.body)
     const sendProudcts = await CoursesDB.create({
       name,
       description,
       price,
-      category,  courseTitle, Stock , about , goal, mission , courseLocation,
+      category,  courseTitle, Stock , about , goal, mission , log , lat ,
       images: {
         public_id:  myCloud.public_id,
         url: myCloud.secure_url,

@@ -54,7 +54,11 @@ const courcesShema = new mongoose.Schema({
     maxLength: [4, "Stock cannot exceed 4 characters"],
     default: 1,
   },
-  courseLocation: {
+  lat: {
+    type: Number,
+    required: [true, "Please Enter course location"],
+  },
+  log: {
     type: Number,
     required: [true, "Please Enter course location"],
   },
