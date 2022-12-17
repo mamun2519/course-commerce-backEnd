@@ -8,33 +8,38 @@ exports.createCourse = async (req, res, next) => {
       // width: 150,
       crop: "scale",
     });
-   
-    
-    
-    
-       const CloudboxOneImage = await cloudinary.v2.uploader.upload(req.body.boxOneImage, {
-        folder: "products",
-        // width: 150,
-        crop: "scale",
-      });
 
- 
-       const CloudboxTwoImage = await cloudinary.v2.uploader.upload(req.body.boxTwoImage, {
-        folder: "products",
-        // width: 150,
-        crop: "scale",
-      });
+    if (req.body.boxOneImage !== "") {
+      var CloudboxOneImage = await cloudinary.v2.uploader.upload(
+        req.body.boxOneImage,
+        {
+          folder: "products",
+          // width: 150,
+          crop: "scale",
+        }
+      );
+    }
+    if (req.body.boxTwoImage !== "") {
+      var CloudboxTwoImage = await cloudinary.v2.uploader.upload(
+        req.body.boxTwoImage,
+        {
+          folder: "products",
+          // width: 150,
+          crop: "scale",
+        }
+      );
+    }
+    if (req.body.boxThreeImage !== "") {
+      var CloudboxThreeImage = await cloudinary.v2.uploader.upload(
+        req.body.boxTwoImage,
+        {
+          folder: "products",
+          // width: 150,
+          crop: "scale",
+        }
+      );
+    }
 
-    
-  
-      const CloudboxThreeImage = await cloudinary.v2.uploader.upload(req.body.boxThreeImage, {
-        folder: "products",
-        // width: 150,
-        crop: "scale",
-      });
-
-    
-      console.log(req.body)
     const {
       name,
       description,
@@ -48,10 +53,9 @@ exports.createCourse = async (req, res, next) => {
       log,
       lat,
       boxOneTitle,
-      boxtwoTitle,
-      boxThreeTitle
+      boxTwoTitle,
+      boxThreeTitle,
     } = req.body;
-
     console.log(req.body);
     const sendProudcts = await CoursesDB.create({
       name,
@@ -66,23 +70,23 @@ exports.createCourse = async (req, res, next) => {
       log,
       lat,
       boxOneTitle,
-      boxtwoTitle,
+      boxTwoTitle,
       boxThreeTitle,
       images: {
         public_id: myCloud.public_id,
         url: myCloud.secure_url,
       },
       boxOneImage: {
-        public_id:CloudboxOneImage.public_id,
-        url: CloudboxOneImage.secure_url,
+        public_id: CloudboxOneImage?.public_id,
+        url: CloudboxOneImage?.secure_url,
       },
       boxTwoImage: {
-        public_id: CloudboxTwoImage.public_id,
-        url: CloudboxTwoImage.secure_url,
+        public_id: CloudboxTwoImage?.public_id,
+        url: CloudboxTwoImage?.secure_url,
       },
       boxThreeImage: {
-        public_id:  CloudboxThreeImage.public_id,
-        url:  CloudboxThreeImage.secure_url,
+        public_id: CloudboxThreeImage?.public_id,
+        url: CloudboxThreeImage?.secure_url,
       },
     });
     res.status(200).json({
