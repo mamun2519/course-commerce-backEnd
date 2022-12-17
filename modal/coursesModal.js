@@ -63,6 +63,39 @@ const courcesShema = new mongoose.Schema({
     required: [true, "Please Enter course location"],
   },
 
+  boxOneImage: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
+  boxOneTitle: {
+    type: String,
+  },
+  boxTwoImage: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
+  boxTwoTitle: {
+    type: String,
+  },
+  boxThreeImage: {
+    public_id: {
+      type: String,
+    },
+    url: {
+      type: String,
+    },
+  },
+  boxThreeTitle: {
+    type: String,
+  },
 
   //     brand: {
   //       type: String,
