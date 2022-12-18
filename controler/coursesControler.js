@@ -31,7 +31,7 @@ exports.createCourse = async (req, res, next) => {
     }
     if (req.body.boxThreeImage !== "") {
       var CloudboxThreeImage = await cloudinary.v2.uploader.upload(
-        req.body.boxTwoImage,
+        req.body.boxThreeImage,
         {
           folder: "products",
           // width: 150,
