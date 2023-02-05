@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const orderShema = new mongoose.Schema({
+const paymentShema = new mongoose.Schema({
       // shippingInfo: {
       //       // name: {
       //       //   type: String,
@@ -75,8 +75,23 @@ const orderShema = new mongoose.Schema({
               type: String ,
               required: true,
             },
-            limit: {
-              type: Number,
+           address:{
+            type: String ,
+            required: true,
+
+           },
+           country:{
+            type: String ,
+            required: true,
+
+           },
+            status:{
+                  type: String ,
+              default: "PAID"
+
+            },
+            paidPrice:{
+                  type: Number,
               required: true,
             },
           
@@ -117,6 +132,6 @@ const orderShema = new mongoose.Schema({
 })
 
 
-const orderModal = new mongoose.model("Order", orderShema)
+const paymentModel = new mongoose.model("Payment", paymentShema)
 
-module.exports = orderModal
+module.exports = paymentModel

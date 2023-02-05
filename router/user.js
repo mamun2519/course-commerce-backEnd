@@ -10,6 +10,7 @@ const {
   createAdmin,
   removeAdmin,
   cheackAdmin,
+  cheackAdviser,
 } = require("../controler/userControler");
 const verifayToken = require("../utilities/verifayToken");
 const router = express.Router();
@@ -24,4 +25,5 @@ router.delete("/delete/:id", deleteUser);
 router.put("/admin/:email", verifayToken, createAdmin);
 router.put("/remove/:email",verifayToken, removeAdmin);
 router.get("/chackAdmin/:email", cheackAdmin);
+router.get("/chackAdviser/:email", cheackAdviser);
 module.exports = router;

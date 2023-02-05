@@ -1,15 +1,23 @@
 const express = require('express');
-const { newOrder, getAllOrders, getSingleOrder, orderDelete, orderUpdate, myOrder, discountPromoCode, paymentGetWay } = require('../controler/orderControler');
+const { newOrder, getAllOrders, getSingleOrder, orderDelete, orderUpdate, myOrder, discountPromoCode, paymentGetWay, paymentHendler, myCourses, allPayments, allSellesOrderList, sellersLimitDeccress, allPaymentOrderList, orderDeleteCourse } = require('../controler/orderControler');
 const router = express.Router()
 
-router.post("/new/:id"  , newOrder)
+router.get("/allPayments", allPayments)
+router.get("/allsellesList/:id", allSellesOrderList)
+router.get("/allPaymentList/:id", allPaymentOrderList)
+router.post("/new"  , newOrder)
+router.post("/limit/:id"  , sellersLimitDeccress)
 router.get("/" ,  getAllOrders)
 router.get("/:id" , getSingleOrder)
 router.delete("/:id" ,  orderDelete)
+router.delete("/order/:id" ,  orderDeleteCourse)
 router.put("/:id" , orderUpdate)
-router.get("/myOrder/:id",  myOrder)
+router.get("/myPayment/:email",  myOrder)
+router.get("/myCourses/:email",  myCourses)
 router.post("/promo" , discountPromoCode)
 router.post("/create-payment-intent", paymentGetWay)
+router.post("/post", paymentHendler)
+
 
 
 

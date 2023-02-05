@@ -3,16 +3,15 @@ const sendToken = require("../utilities/sendToken");
 
 exports.userRegister = async (req, res, next) => {
   try {
-    const { name, email } = req.body;
+    const { name, email, role, adviserUserName } = req.body;
     const user = await UserDB.findOne({ email: email });
     if (user)
       return res
         .status(202)
         .send({ success: false, message: "User Already Exists" });
-    const adduser = await UserDB.create({ name, email });
+    const adduser = await UserDB.create({ name, email, role, adviserUserName });
     // res.send({ success: true, message: "register Successfull" });
     sendToken(adduser, 200, res);
-    
   } catch (e) {
     console.log(e);
   }
@@ -54,10 +53,10 @@ exports.getAllAdvaiser = async (req, res, next) => {
     const limit = parseInt(req.query.limit) || 10;
     // const search = req.query.search || "";
     const user = await UserDB.find({
-      $and: [{ role: "advaiser" }],
-    })
-      // .skip(page * limit)
-      // .limit(limit);
+      $and: [{ role: "Adviser" }],
+    });
+    // .skip(page * limit)
+    // .limit(limit);
     res.json({ success: true, user, page: page + 1, limit });
   } catch (e) {
     console.log(e);
@@ -71,9 +70,9 @@ exports.getAllOwner = async (req, res, next) => {
     // const search = req.query.search || "";
     const user = await UserDB.find({
       $and: [{ role: "owner" }],
-    })
-      // .skip(page * limit)
-      // .limit(limit);
+    });
+    // .skip(page * limit)
+    // .limit(limit);
     res.json({ success: true, user, page: page + 1, limit });
   } catch (e) {
     console.log(e);
@@ -128,12 +127,12 @@ exports.createAdmin = async (req, res, next) => {
     const requestAdmin = await UserDB.findOne({ email: adminRequester });
     if (requestAdmin.role == "owner") {
       const roleAction = req.query.roleAction;
-      
-      if (roleAction == "advaiser") {
+
+      if (roleAction == "Adviser") {
         const makeAdmin = await UserDB.updateOne(
           { email },
           {
-            $set: { role: "advaiser" },
+            $set: { role: "Adviser" },
           }
         );
         if (makeAdmin.modifiedCount > 0) {
@@ -177,9 +176,9 @@ exports.createAdmin = async (req, res, next) => {
 exports.removeAdmin = async (req, res, next) => {
   try {
     const email = req.params.email;
-    
+
     const adminRequester = req.decoded.email;
-    console.log(adminRequester)
+    console.log(adminRequester);
     const requestAdmin = await UserDB.findOne({ email: adminRequester });
     if (requestAdmin.role == "owner") {
       const roleAction = req.query.roleAction;
@@ -218,10 +217,30 @@ exports.cheackAdmin = async (req, res, next) => {
     if (!user) {
       res.status(404).json({ message: "User Not Found" });
     } else {
-      const isAdmin = user.role === "owner" || user.role === "advaiser";
+      const isAdmin = user.role === "owner" ;
       res.status(200).json({
         success: true,
         admin: isAdmin,
+      });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+exports.cheackAdviser = async (req, res, next) => {
+  try {
+    const email = req.params.email;
+    console.log(email)
+    const user = await UserDB.findOne({ email });
+    console.log(user);
+    if (!user) {
+      res.status(404).json({ message: "User Not Found" });
+    } else {
+      const isAdviser = user.role === "Adviser";
+      res.status(200).json({
+        success: true,
+        adviser: isAdviser,
       });
     }
   } catch (error) {

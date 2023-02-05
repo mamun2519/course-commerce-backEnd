@@ -11,6 +11,16 @@ const userShema = new mongoose.Schema({
             required: [true, "Please Enter Your Email"],
             unique: true,
           },
+          status:{
+            type: String,
+            default: "NOT PAID"
+
+          },
+          adviserUserName:{
+            type: String,
+            default: "No Adviser"
+
+          },
       //     avatar: {
       //       public_id: {
       //         type: String,
@@ -23,7 +33,8 @@ const userShema = new mongoose.Schema({
       //     },
           role: {
             type: String,
-            default: "user",
+            required: true
+            // default: "user",
           },
          
           

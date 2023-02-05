@@ -10,10 +10,19 @@ const courcesShema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
-  price: {
-    type: Number,
-    required: [true, "Please Enter product Price"],
-    maxLength: [8, "Price cannot exceed 8 characters"],
+  // price: {
+  //   type: Number,
+  //   required: [true, "Please Enter product Price"],
+  //   maxLength: [8, "Price cannot exceed 8 characters"],
+  // },
+  status:{
+    type: String,
+    default: "Pending"
+
+  },
+  email: {
+    type: String,
+    required: [true, "Please Enter product Description"],
   },
 
   courseTitle: {

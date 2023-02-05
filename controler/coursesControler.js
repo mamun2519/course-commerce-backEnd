@@ -1,6 +1,5 @@
 const CoursesDB = require("../modal/coursesModal");
 const cloudinary = require("cloudinary");
-
 exports.createCourse = async (req, res, next) => {
   try {
     const myCloud = await cloudinary.v2.uploader.upload(req.body.images, {
@@ -43,7 +42,7 @@ exports.createCourse = async (req, res, next) => {
     const {
       name,
       description,
-      price,
+      email,
       category,
       courseTitle,
       Stock,
@@ -56,11 +55,11 @@ exports.createCourse = async (req, res, next) => {
       boxTwoTitle,
       boxThreeTitle,
     } = req.body;
-    console.log(req.body);
+    
     const sendProudcts = await CoursesDB.create({
       name,
       description,
-      price,
+      email,
       category,
       courseTitle,
       Stock,
@@ -90,7 +89,7 @@ exports.createCourse = async (req, res, next) => {
       },
     });
     res.status(200).json({
-      message: "course Added SuccessFull",
+      message: "Course Publish Successfull",
       product: sendProudcts,
     });
   } catch (e) {
@@ -147,19 +146,28 @@ exports.updateCourser = async (req, res, next) => {
 };
 
 exports.deleteCourse = async (req, res, next) => {
+ try{
   const id = req.params.id;
   let course = await CoursesDB.findById(id);
+  console.log(course);
   if (!course) {
-    res.status(500).json({
+    res.status(500).send({
       success: false,
       message: "Course Not found",
     });
   }
-  await course.remove();
-  res.status(200).json({
+  else{
+    await course.remove();
+  res.status(200).send({
     success: true,
     message: "Course Delete Successfull",
   });
+  }
+ }
+
+ catch(e){
+
+ }
 };
 
 exports.getCourseDetels = async (req, res, next) => {
@@ -170,3 +178,22 @@ exports.getCourseDetels = async (req, res, next) => {
     course,
   });
 };
+
+exports.myActiveCourses = async (req , res , next) =>{
+  const course = await CoursesDB.find({email: req.params.email})
+  console.log(course)
+  res.send({success: true , course})
+
+}
+
+exports.allPayments = async (req, res, next) =>{
+  try{
+    const payments = await Payment.find()
+    console.log(payments)
+    res.send({success: true , payments})
+  }
+  catch(e){
+    console.log(e);
+  }
+ 
+}

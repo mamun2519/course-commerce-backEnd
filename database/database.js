@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 
 const database = () =>{
 
-const uri = `mongodb+srv://${process.env.DB_NAME}:${process.env.DB_PASS}@mamun.e6toytj.mongodb.net/?retryWrites=true&w=majority`
+// const uri = `mongodb+srv://rubel:k!r9qnFujyBvs!f@cluster0.iy8np2n.mongodb.net/?retryWrites=true&w=majority`
+const uri = `mongodb+srv://mamun:JGEydg3A6ishHXjc@mamun.e6toytj.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.connect(uri , { useNewUrlParser: true, useUnifiedTopology: true })
 .then((data) => {
