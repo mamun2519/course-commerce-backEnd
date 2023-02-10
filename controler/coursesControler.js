@@ -51,6 +51,7 @@ exports.createCourse = async (req, res, next) => {
       mission,
       log,
       lat,
+      price,
       boxOneTitle,
       boxTwoTitle,
       boxThreeTitle,
@@ -58,6 +59,7 @@ exports.createCourse = async (req, res, next) => {
     
     const sendProudcts = await CoursesDB.create({
       name,
+      price,
       description,
       email,
       category,

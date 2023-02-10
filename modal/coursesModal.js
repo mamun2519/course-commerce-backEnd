@@ -10,11 +10,11 @@ const courcesShema = new mongoose.Schema({
     type: String,
     required: [true, "Please Enter product Description"],
   },
-  // price: {
-  //   type: Number,
-  //   required: [true, "Please Enter product Price"],
-  //   maxLength: [8, "Price cannot exceed 8 characters"],
-  // },
+  price: {
+    type: String,
+    required: [true, "Please Enter product Price"],
+    // maxLength: [8, "Price cannot exceed 8 characters"],
+  },
   status:{
     type: String,
     default: "Pending"
@@ -51,11 +51,11 @@ const courcesShema = new mongoose.Schema({
   },
   goal: {
     type: String,
-    required: [true, "Please Enter about"],
+    // required: [true, "Please Enter about"],
   },
   mission: {
     type: String,
-    required: [true, "Please Enter about"],
+    // required: [true, "Please Enter about"],
   },
   Stock: {
     type: Number,
