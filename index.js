@@ -6,7 +6,7 @@ require('dotenv').config()
 const paypal = require('paypal-rest-sdk');
 const port = process.env.PORT || 5000
 
-// server configrations
+// server configrationsssssssssssssss
 
 database()
 cloudinary.config({
@@ -15,7 +15,7 @@ cloudinary.config({
       api_secret: process.env.CLOUDINARY_API_SECRET,
     });
     paypal.configure({
-      'mode': 'sandbox', //sandbox or live
+      'mode': 'sandbox', //sandbox or livesss
       'client_id': 'AVtywy4P1cuBKBUJLizfmYe86U_TukffZg1GsiojtPFPhyGrkhcU8tKC11-k4NeIaqxXSqs8yXmgYnio',
       'client_secret': 'EMUKO8K2HFgc8Ay7bnHOlm8n5IK66nDOboVXXlTdU9i7jAFO8mOdwD4jfwNyDYUq2akBSDXxHYHkCmg2'
     });
