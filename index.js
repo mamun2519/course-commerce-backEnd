@@ -4,7 +4,7 @@ const database = require('./database/database')
 const cloudinary = require('cloudinary').v2
 require('dotenv').config()
 const paypal = require('paypal-rest-sdk');
-const port = process.env.PORT || "192.168.31.235:19000"
+const port = process.env.PORT || 5000
 
 // server configrations
 
